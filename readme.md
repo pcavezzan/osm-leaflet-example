@@ -1,9 +1,5 @@
 # How to quickly create your own map
 
-Pretty recently, I have to deal with problem for one client. For one of his customer, he had to build a GIS (Geographic Information System). 
-
-The only problem we faced pretty quickly was that, for some reasons, we could not use unfortunatly google maps. So we decided to do, like big web companies such as Flickr or FourSquare, to build our GIS on OpenStreetMap. 
-
 This project is just a start to quickly demonstrate how easy it is to create a map with our own geodata based on:
 * PostgreSQL with PostGis extension to store our geodata
 * Mapnik to render tiles from the geodata
