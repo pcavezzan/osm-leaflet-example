@@ -25,7 +25,7 @@ First of all, we need to import our OSM (OpenStreetData) data. For that, we are 
 $>sudo apt-get install osmosis
 $>osmosis --read-xml haute-normandie-latest.osm.bz2 --write-xml /tmp/haute-normandie.osm
 ```
-2. install osm2pgsql to import osm data into postgresql (or just use like me a docker image to do that :smiley:)
+2. install osm2pgsql to import osm data into postgresql (or just use a docker image to do that :smiley:)
 ```
 $>docker run -i -t --rm -v /tmp:/osm openfirmware/osm2pgsql -c 'osm2pgsql -m -d sig -H <docker_ip_postgis_container> -U sig -W /osm/haute-normandie.osm'
 ```
