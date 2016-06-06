@@ -10,6 +10,7 @@ This project is just a start to quickly demonstrate how easy it is to create a m
 All our GIS is containerized. So basically, you only need to run only commandline:
 ```
 $>cd <gis_dir_depo_cloned>
+$>rm data/.gitignore
 $>docker-compose up --build
 ```
 Afer a few seconds (when all containers are up), just go to http://localhost and you should see your own street map !
@@ -18,14 +19,19 @@ Afer a few seconds (when all containers are up), just go to http://localhost and
 
 ### GeoData with PostGis
 
-First of all, we need to import our OSM (OpenStreetData) data. For that, just install OSM tools such as osmosis, osm2pgsql (under Ubuntu, `$>sudo apt-get install osmosis osm2pgsql`).
+First of all, we need to import our OSM (OpenStreetData) data. For that, we are going to do two things:
+1. install osmosis to convert uncompress osm data into an osm file
 ```
-$>osmosis --read-xml haute-normandie-latest.osm.bz2 --write-xml haute-normandie.osm
-$>osm2pgsql -m -d gis -H <ip_docker_container_postgis> -U gis -W haute-normandie.osm
+$>sudo apt-get install osmosis
+$>osmosis --read-xml haute-normandie-latest.osm.bz2 --write-xml /tmp/haute-normandie.osm
+```
+2. install osm2pgsql to import osm data into postgresql (or just use like me a docker image to do that :smiley:)
+```
+$>docker run -i -t --rm -v /tmp:/osm openfirmware/osm2pgsql -c 'osm2pgsql -m -d sig -H <docker_ip_postgis_container> -U sig -W /osm/haute-normandie.osm'
 ```
 Then you should see your table in GIS database:
 ```
-$>psql -H <ip_docker_container_postgis> -U gis gis
+$>psql -H <ip_docker_container_postgis> -U sig sig
 $>\dt
 ```
 Now your geodatabase is ready, let''s use it.
