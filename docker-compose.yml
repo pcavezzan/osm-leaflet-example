@@ -1,0 +1,25 @@
+postgis:
+  image: camptocamp/postgis
+  environment:
+    - POSTGRES_USER=sig
+    - POSTGRES_PASSWORD=sig
+  volumes:
+    - ./data:/var/lib/postgresql/data
+mapnik:
+  build: ./mapnik
+  links:
+    - postgis:pg
+  environment:
+    - PG_ENV_OSM_DB=gis
+    - PG_ENV_OSM_USER=gis
+    - PG_ENV_OSM_PWD=gis
+  ports:
+    - 8080:80
+apache:
+  image: httpd:2.4
+  links:
+    - mapnik:mapnik
+  ports:
+    - 80:80
+  volumes:
+    - ./www:/usr/local/apache2/htdocs
