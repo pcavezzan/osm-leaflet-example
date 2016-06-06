@@ -7,13 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-	<!-- <link rel="stylesheet" href="leaflet/v0.7.7/leaflet.css" /> -->
 	
 </head>
 <body>
 	<div id="mapid" style="width: 600px; height: 400px"></div>
 	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-	<!-- <script src="leaflet/v0.7.7/leaflet.js"></script> -->
 	<script>
 
 		var osmLayer = L.tileLayer('http://172.17.0.3/osm/{z}/{x}/{y}.png', {
@@ -45,18 +43,6 @@
 		L.marker([49.440, 1.095]).addTo(mymap)
     		.bindPopup('Cathédrale de Rouen <a href="https://fr.wikipedia.org/wiki/Cath%C3%A9drale_Notre-Dame_de_Rouen">Lire plus</a>.')
     		.openPopup();
-
-    	/*
-    	var popup = L.popup();
-
-		function onMapClick(e) {
-		    popup.setLatLng(e.latlng)
-		    	.setContent("You clicked the map at " + e.latlng.toString())
-		        .openOn(mymap);
-		}
-
-		mymap.on('click', onMapClick);
-		*/
 	</script>
 </body>
 </html>
