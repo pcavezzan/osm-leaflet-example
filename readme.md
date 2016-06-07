@@ -15,6 +15,8 @@ $>docker-compose up --build
 ```
 Afer a few seconds (when all containers are up), just go to http://localhost and you should see your own street map !
 
+**_If you have not imported yet your data, just import your data then restart mapnik container as it would probably not have been able to connect to the geodatabase._**
+
 ## In details
 
 ### GeoData with PostGis
@@ -27,11 +29,11 @@ $>osmosis --read-xml haute-normandie-latest.osm.bz2 --write-xml /tmp/haute-norma
 ```
 2. install osm2pgsql to import osm data into postgresql (or just use a docker image to do that :smiley:)
 ```
-$>docker run -i -t --rm -v /tmp:/osm openfirmware/osm2pgsql -c 'osm2pgsql -m -d sig -H <docker_ip_postgis_container> -U sig -W /osm/haute-normandie.osm'
+$>docker run -i -t --rm -v /tmp:/osm openfirmware/osm2pgsql -c 'osm2pgsql -m -d gis -H <docker_ip_postgis_container> -U gis -W /osm/haute-normandie.osm'
 ```
 Then you should see your table in GIS database:
 ```
-$>psql -H <ip_docker_container_postgis> -U sig sig
+$>psql -h <ip_docker_container_postgis> -U gis gis
 $>\dt
 ```
 Now your geodatabase is ready, let''s use it.
